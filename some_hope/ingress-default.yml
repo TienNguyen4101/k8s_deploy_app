@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: default-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  labels:
+    app: hello
+spec:
+  defaultBackend:
+    service:
+       name: hello
+       port:
+         number: 8080

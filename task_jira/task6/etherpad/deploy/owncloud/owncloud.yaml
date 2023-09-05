@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: owncloud-service
+  namespace: demo-app
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: owncloud-app
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: owncloud-service
+  name: owncloud-service
+  namespace: demo-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: owncloud-app
+  template:
+    metadata:
+      labels:
+        run: owncloud-app
+    spec:
+      containers:
+      - image: chiru123123/owncloud:latest
+        imagePullPolicy: IfNotPresent
+        name: owncloud
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        volumeMounts:
+          - name: owncloud-data
+            mountPath: /var/www/owncloud/data
+      volumes:
+      - name: owncloud-data
+        persistentVolumeClaim:
+          claimName: pvc1

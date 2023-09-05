@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/publicEndpoints: '[{"addresses":["192.168.30.220"],"port":80,"protocol":"TCP","serviceName":"ingress-nginx:ingress-nginx","allNodes":false},{"addresses":["192.168.30.220"],"port":443,"protocol":"TCP","serviceName":"ingress-nginx:ingress-nginx","allNodes":false}]'
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app.kubernetes.io/name":"ingress-nginx","app.kubernetes.io/part-of":"ingress-nginx"},"name":"ingress-nginx","namespace":"ingress-nginx"},"spec":{"ports":[{"name":"http","port":80,"targetPort":"http"},{"name":"https","port":443,"targetPort":"https"}],"selector":{"app.kubernetes.io/name":"ingress-nginx","app.kubernetes.io/part-of":"ingress-nginx"},"type":"LoadBalancer"}}
+    metallb.universe.tf/ip-allocated-from-pool: first-pool
+  creationTimestamp: "2023-08-15T02:20:41Z"
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          f:metallb.universe.tf/ip-allocated-from-pool: {}
+      f:status:
+        f:loadBalancer:
+          f:ingress: {}
+    manager: controller
+    operation: Update
+    time: "2023-08-15T02:20:41Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:labels:
+          .: {}
+          f:app.kubernetes.io/name: {}
+          f:app.kubernetes.io/part-of: {}
+      f:spec:
+        f:externalTrafficPolicy: {}
+        f:ports:
+          .: {}
+          k:{"port":80,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+          k:{"port":443,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+        f:selector:
+          .: {}
+          f:app.kubernetes.io/name: {}
+          f:app.kubernetes.io/part-of: {}
+        f:sessionAffinity: {}
+        f:type: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2023-08-15T02:20:41Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          f:field.cattle.io/publicEndpoints: {}
+    manager: rancher
+    operation: Update
+    time: "2023-08-15T02:20:41Z"
+  name: ingress-nginx
+  namespace: ingress-nginx
+  resourceVersion: "2692185"
+  uid: b2df564c-06ae-48b5-80d8-3f857f615eef
+spec:
+  clusterIP: 10.233.12.30
+  clusterIPs:
+  - 10.233.12.30
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: http
+    nodePort: 31182
+    port: 80
+    protocol: TCP
+    targetPort: http
+  - name: https
+    nodePort: 31582
+    port: 443
+    protocol: TCP
+    targetPort: https
+  selector:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 192.168.30.220

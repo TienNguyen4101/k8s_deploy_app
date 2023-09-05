@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app
+  namespace: app-test
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  tls:
+  - hosts: 
+    - ansible.svtech.gay
+    secretName: leighton-cert
+  rules:
+  - host: ansible.svtech.gay
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: http-test-svc
+            port:
+              number: 80

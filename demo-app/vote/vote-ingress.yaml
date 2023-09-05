@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vote
+  namespace: demo-app
+spec:
+  tls:
+  - hosts: 
+    - ansible.svtech.gay
+    secretName: leighton-cert
+  ingressClassName: nginx
+  rules:
+    - host: ansible.svtech.gay
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: vote
+              port:
+                number: 8080

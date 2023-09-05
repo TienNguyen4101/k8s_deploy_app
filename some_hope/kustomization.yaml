@@ -1,0 +1,4 @@
+ources:
+  - class.yaml
+  - rbac.yaml
+  - deployment.yaml
